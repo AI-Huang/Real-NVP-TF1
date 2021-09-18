@@ -1,1 +1,2 @@
 tensorflow-gpu==1.15
+horovod==0.22
