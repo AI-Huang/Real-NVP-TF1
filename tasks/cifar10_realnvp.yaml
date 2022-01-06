@@ -1,0 +1,31 @@
+dataset_params:
+  dataset: "cifar10"
+  data_dir: "~/.datasets"
+  in_channels: 3
+  batch_size: 64
+
+model_params:
+  arch: "RealNVP"
+  loss: "realnvp" # "realnvp" or "compression"
+  num_scales: 2 # downscale only once
+  num_steps: 3 # 4 for in_couplings and out_couplings individually, totally 8
+  num_blocks: 8 # number of residual blocks in each ResNet
+  mid_channels: 64 # feature maps
+  lambda: 500
+  pattern: multi_first # pattern equation to use: multiplication first
+
+exper_params:
+  batch_size: 32
+  lr: 0.001
+  optimizer: "adam"
+  weight_decay: 5e−5 # L2 regularization
+  # scheduler_gamma: 0.95
+
+trainer_params:
+  gpus: 1
+  max_epochs: 100
+
+logging_params:
+  # save_dir: "logs/"
+  # name: "VanillaVAE"
+  # manual_seed: 1265

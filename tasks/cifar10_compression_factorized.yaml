@@ -1,0 +1,34 @@
+dataset_params:
+  dataset: "cifar10"
+  data_dir: "~/.datasets"
+  in_channels: 3
+  batch_size: 64
+
+model_params:
+  arch: "RealNVPCompression"
+  loss: "compression" # "realnvp" or "compression"
+  quantize: True
+  factorized: True
+  num_scales: 3 # 3 scales, downscale twice
+  num_steps: 3 # 3 for in_couplings and out_couplings individually, totally 6
+  num_blocks: 2 # number of residual blocks in each ResNet
+  mid_channels: 64 # feature maps
+  lambda: 500
+  pattern: "multi_first" # pattern equation to use: multiplication first
+
+exper_params:
+  lr: 0.001 # Both Lossy Image[1] and RealNVP[2]
+  optimizer: "AdaMax" # Optional, AdaMax in Lossy Image[1], Adam in RealNVP
+  weight_decay: 0.5e-04 # 5e-5, L2 regularization, from RealNVP[2]
+  eps: 1.0e-07 # Epsilon of AdaMax, from Lossy Image[1]
+  # scheduler_gamma: 0.95
+  sample_images: True
+
+trainer_params:
+  gpus: 1
+  max_epochs: 100
+
+logging_params:
+  # save_dir: "logs/"
+  # name: "VanillaVAE"
+  # manual_seed: 1265
